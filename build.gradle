@@ -1,0 +1,60 @@
+import java.nio.charset.StandardCharsets
+//built jar is in /build/libs
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+tasks.build.dependsOn tasks.shadowJar
+
+group 'lol.arctic'
+version '1.2-SNAPSHOT'
+mainClassName = 'lol.arctic.Main'
+
+
+application {
+    mainClass = 'lol.arctic.Main'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation('com.squareup.okhttp3:okhttp:4.9.2')
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation group: 'commons-io', name: 'commons-io', version: '2.9.0'
+
+    // https://mvnrepository.com/artifact/org.rauschig/jarchivelib
+    implementation group: 'org.rauschig', name: 'jarchivelib', version: '1.1.0'
+
+// https://mvnrepository.com/artifact/org.json/json
+    implementation group: 'org.json', name: 'json', version: '20210307'
+
+// https://mvnrepository.com/artifact/commons-cli/commons-cli
+    implementation group: 'commons-cli', name: 'commons-cli', version: '1.4'
+
+// https://mvnrepository.com/artifact/org.tukaani/xz
+    implementation group: 'org.tukaani', name: 'xz', version: '1.9'
+
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-math3
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+
+
+
+}
+
+shadowJar {
+    archiveClassifier.set("")
+}
+jar {
+    enabled(true)
+}
+
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = StandardCharsets.UTF_8.name()
+}
